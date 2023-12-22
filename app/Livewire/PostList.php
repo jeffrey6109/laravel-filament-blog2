@@ -28,27 +28,41 @@ class PostList extends Component
         $this->sort = ($sort === 'desc') ? 'desc' : 'asc';
     }
 
+
     #[On('search')]
     public function updateSearch($search)
     {
         $this->search = $search;
+        $this->resetPage();
+    }
+
+    public function clearFilters()
+    {
+        $this->search = '';
+        $this->category = '';
+        $this->resetPage();
     }
 
     #[Computed()]
     public function posts()
     {
         return Post::published()
-                ->orderBy('published_at', $this->sort)
-                ->when($this->activeCategory, function ($query) {
-                    $query->withCategory($this->category);
-                })
-                ->orWhere('title', 'like', "%{ $this->search }%")
-                ->paginate(5);
+            ->with('author', 'categories')
+            ->when($this->activeCategory, function ($query) {
+                $query->withCategory($this->category);
+            })
+            ->orWhere('title', 'LIKE', "%{ $this->search }%")
+            ->orderBy('published_at', $this->sort)
+            ->paginate(3);
     }
 
     #[Computed()]
     public function activeCategory()
     {
+        if ($this->category === null || $this->category === '') {
+            return null;
+        }
+
         return Category::where('slug', $this->category)->first();
     }
 

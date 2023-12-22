@@ -19,4 +19,11 @@ class PostController extends Controller
             ->get(),
         ]);
     }
+
+    public function show(Post $post)
+    {
+        return view('posts.show', [
+           'post' => $post
+        ]);
+    }
 }
