@@ -15,14 +15,14 @@
 
             @if($search)
                 <span class="ml-2">
-                        containing : <strong>{{ $search }}</strong>
+                        {{ __('blog.containing') }} : <strong>{{ $search }}</strong>
                 </span>
             @endif
         </div>
         <div class="flex items-center space-x-4 font-light ">
-            <x-checkbox wire:model.live="popular" /> <x-label>Popular</x-label>
-            <button class="{{ $sort === 'desc' ? 'text-violet-900 py-4 border-b border-violet-700' : 'text-gray-500'  }} py-4" wire:click="setSort('desc')">Latest</button>
-            <button class="{{ $sort === 'asc' ? 'text-violet-900 py-4 border-b border-violet-700' : 'text-gray-500'  }} py-4" wire:click="setSort('asc')">Oldest</button>
+            <x-checkbox wire:model.live="popular" /> <x-label>{{ __('blog.popular') }}</x-label>
+            <button class="{{ $sort === 'desc' ? 'text-violet-900 py-4 border-b border-violet-700' : 'text-gray-500'  }} py-4" wire:click="setSort('desc')">{{ __('blog.latest') }}</button>
+            <button class="{{ $sort === 'asc' ? 'text-violet-900 py-4 border-b border-violet-700' : 'text-gray-500'  }} py-4" wire:click="setSort('asc')">{{ __('blog.oldest') }}</button>
         </div>
     </div>
 

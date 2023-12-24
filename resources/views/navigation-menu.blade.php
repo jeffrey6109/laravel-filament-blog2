@@ -4,9 +4,13 @@
 
         <div class="text-gray-800 font-semibold">
 
-            <a href="{{ route('home') }}">
+            <a href="{{ route('home') }}" class="flex items-center">
                 <x-application-mark class="block h-9 w-auto" />
+                <span class="text-violet-700 ml-2">&lt;Tran-X&gt;</span> <span class="text-gray-900"> Blog</span>
             </a>
+
+
+
         </div>
 
         <div class="top-menu ml-10">
@@ -14,11 +18,11 @@
             <div class="flex space-x-4">
 
                 <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
-                    {{ __('Home') }}
+                    {{ __('menu.home') }}
                 </x-nav-link>
 
                 <x-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
-                    {{ __('Blog') }}
+                    {{ __('menu.blog') }}
                 </x-nav-link>
 
             </div>
